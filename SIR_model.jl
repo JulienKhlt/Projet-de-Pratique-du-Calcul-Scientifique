@@ -9,9 +9,9 @@ R = 0
 # Paramètre de l'épidémie:
 
 β = 1
-γ = 1
+γ = 0.25
 pas_tps = 0.1
-tps = 100
+tps = 40
 T = range(0, tps, length = Int(tps/pas_tps))
 
 function epidemie(S, I, R, β, γ, pas_tps, tps)
@@ -36,9 +36,14 @@ function epidemie(S, I, R, β, γ, pas_tps, tps)
         append!(Recovered, R)
     end
     T = range(0, tps, length = Int(tps/pas_tps)+1)
-    plot(T, Susceptible, "x")
-    plot(T, Infectious, "x")
-    plot(T, Recovered, "x")
+    plot(T, Susceptible, color="#4a4c4d", linewidth=2.0, linestyle="-", label="Susceptible")
+    plot(T, Infectious, color="#c13607", linewidth=2.0, linestyle="-", label="Infectious")
+    plot(T, Recovered, color="#3c9f66", linewidth=2.0, linestyle="-", label="Recovered")
+    title(L"Model \ SIR")
+    xlabel(L"Temps")
+    ylabel(L"Nombre \ de \ personne")
+    legend()
+    grid("on")
     show()
 end
 
