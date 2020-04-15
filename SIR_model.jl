@@ -12,7 +12,6 @@ R = 0
 γ = 0.25
 pas_tps = 0.1
 tps = 40
-T = range(0, tps, length = Int(tps/pas_tps))
 
 function f(U, β, γ, N)
     dUdt = [- β*U[2]*U[1]/N, β*U[2]*U[1]/N - γ*U[2], γ*U[2]]
