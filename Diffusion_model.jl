@@ -3,7 +3,7 @@ using PyPlot
 Nombre_maille = 100
 x = range(0, 1, length=Nombre_maille)
 dx = 1/Nombre_maille
-D = 1.0
+D = 0.001
 
 U = [zeros(Nombre_maille) for _ in 1:3]
 laplacien = [zeros(Nombre_maille) for _ in 1:3]
@@ -25,10 +25,10 @@ end
 
 pas_tps = 3e-2
 tps = 10
-β = 1
+β = 7
 γ = 0.25
 
-function diffusion(U, β, γ, D, dx, pas_tps, tps)
+function diffusion(U, β, γ, D, x, dx, pas_tps, tps)
     Epidemie = [U]
     N = Nombre_maille + 1
     for t in range(pas_tps, tps, length = trunc(Int, (tps/pas_tps)))
@@ -39,12 +39,25 @@ function diffusion(U, β, γ, D, dx, pas_tps, tps)
         end
         U .+= pas_tps*(D*laplacien + f(U, β, γ, N)) 
         append!(Epidemie, [U])
-        println(U)
-        
     end
-    println(Epidemie)
+    for t in 1:trunc(Int, (tps/pas_tps))
+        if t%10 == 0
+            plot(x, Epidemie[t][1], color="#4a4c4d", linewidth=2.0, linestyle="-", label="Susceptible")
+            plot(x, Epidemie[t][2], color="#c13607", linewidth=2.0, linestyle="-", label="Infectious")
+            plot(x, Epidemie[t][3], color="#3c9f66", linewidth=2.0, linestyle="-", label="Recovered")
+            title(string("Model Diffusion à t=", string(t)))
+            xlabel(L"Position")
+            ylabel(L"Nombre \ de \ personne")
+            if t==10
+                legend()
+            end
+            grid("on")
+            pause(1e-5)
+        end
+    end
+    show()
 end
 
-diffusion(U, β, γ, D, dx, pas_tps, tps)
+diffusion(U, β, γ, D, x, dx, pas_tps, tps)
 
 # f(U, β, γ, Nombre_maille+1)
