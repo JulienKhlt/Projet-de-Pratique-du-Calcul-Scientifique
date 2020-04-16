@@ -54,7 +54,7 @@ avec $N = S + I + R$ <br>
 
 On reprend les mêmes équations que précédement mais en y ajoutant de la diffusion.
 *Lorsqu'executé le document créera des courbes grace à PyPlot qu'il faut avoir installé.* <br>
-**Attention il faut que $\frac{Ddt}{dx^2} < \frac{1}{2}$**
+**Attention il faut que ![\frac{Ddt}{dx^2} < \frac{1}{2}](https://render.githubusercontent.com/render/math?math=%5Cfrac%7BDdt%7D%7Bdx%5E2%7D%20%3C%20%5Cfrac%7B1%7D%7B2%7D)**
 
 ### TODO
 
